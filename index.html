@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YoungKingArtur</title>
+  <meta name="description" content="Oficjalny link-in-bio @YoungKingArtur — YouTube, TikTok, Spotify, Instagram, X" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0f;
+      --surface: #13131a;
+      --border:  rgba(255,255,255,0.08);
+      --gold:    #c9a84c;
+      --text:    #f0f0f0;
+      --muted:   #888;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 110% 80%, rgba(138,43,226,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 80px;
+      min-height: 100vh;
+    }
+
+    /* ── avatar ── */
+    .avatar-ring {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(from 180deg, var(--gold), #7b2ff7, var(--gold));
+      flex-shrink: 0;
+      animation: spin-ring 8s linear infinite;
+    }
+    @keyframes spin-ring { to { transform: rotate(360deg); } }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: spin-ring 8s linear infinite reverse;
+    }
+    .avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* ── header ── */
+    .name {
+      margin-top: 20px;
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .handle {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+    }
+
+    .tagline {
+      margin-top: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.02em;
+      background: linear-gradient(90deg, #fff 0%, var(--gold) 60%, #fff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    /* ── divider ── */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px 0;
+      border-radius: 2px;
+    }
+
+    /* ── links ── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      background: linear-gradient(135deg, var(--accent, white), transparent 70%);
+    }
+
+    .link-btn:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.18); }
+    .link-btn:hover::before { opacity: 1; }
+    .link-btn:hover { box-shadow: 0 8px 30px -8px var(--accent, rgba(255,255,255,0.2)); }
+    .link-btn:active { transform: translateY(0); }
+
+    .link-btn.youtube   { --accent: #ff0000; }
+    .link-btn.tiktok    { --accent: #69c9d0; }
+    .link-btn.spotify   { --accent: #1db954; }
+    .link-btn.instagram { --accent: #e1306c; }
+    .link-btn.x         { --accent: #aaaaaa; }
+
+    .icon-wrap {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .icon-wrap svg { width: 22px; height: 22px; }
+
+    .btn-text { display: flex; flex-direction: column; position: relative; z-index: 1; }
+    .btn-label { font-size: 1rem; font-weight: 700; }
+
+    .arrow {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+      position: relative; z-index: 1;
+      transition: transform 0.18s ease;
+    }
+    .link-btn:hover .arrow { transform: translateX(3px); }
+
+    /* ── footer ── */
+    .footer {
+      margin-top: auto;
+      padding-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.04em;
+      transition: color 0.15s;
+      padding: 0;
+      font-family: inherit;
+    }
+    .footer-links button:hover { color: var(--gold); }
+
+    /* ── modals ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 8000;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open {
+      display: flex;
+      animation: backdropIn 0.2s ease forwards;
+    }
+    @keyframes backdropIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal {
+      background: #16161f;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 680px;
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1) forwards;
+    }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .modal-close {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+
+    .modal-body {
+      overflow-y: auto;
+      padding: 22px 22px 32px;
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: rgba(240,240,240,0.75);
+      flex: 1;
+    }
+    .modal-body h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+    .modal-body h3:first-child { margin-top: 0; }
+    .modal-body p { margin-bottom: 10px; }
+    .modal-body ul, .modal-body ol { padding-left: 18px; margin-bottom: 10px; }
+    .modal-body li { margin-bottom: 4px; }
+
+    .modal-placeholder {
+      border: 1px dashed rgba(201,168,76,0.25);
+      border-radius: 10px;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .modal-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.75rem;
+      margin: 10px 0 14px;
+      display: block;
+      overflow-x: auto;
+    }
+    .modal-body th, .modal-body td {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      min-width: 80px;
+    }
+    .modal-body th {
+      background: rgba(201,168,76,0.08);
+      color: var(--gold);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .modal-body .note {
+      background: rgba(201,168,76,0.06);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 10px 0;
+    }
+
+    /* ════════════════════════════════════════
+       COOKIE BANNER
+    ════════════════════════════════════════ */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: #1a1a24;
+      border-top: 1px solid rgba(201,168,76,0.25);
+      box-shadow: 0 -12px 40px rgba(0,0,0,0.5);
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      opacity: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    #cookie-banner.hidden {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+    }
+
+    .cookie-top {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cookie-top strong {
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+
+    .cookie-top p { color: var(--muted); }
+    .cookie-top a { color: var(--gold); text-underline-offset: 3px; }
+
+    /* toggles */
+    .cookie-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cookie-cat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s;
+      flex: 1 1 140px;
+    }
+    .cookie-cat:hover { border-color: rgba(201,168,76,0.4); }
+
+    .cookie-cat input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 34px; height: 18px;
+      border-radius: 9px;
+      background: #333;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .cookie-cat input[type="checkbox"]::after {
+      content: '';
+      position: absolute;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      top: 2px; left: 2px;
+      transition: left 0.2s;
+    }
+    .cookie-cat input[type="checkbox"]:checked { background: var(--gold); }
+    .cookie-cat input[type="checkbox"]:checked::after { left: 18px; }
+    .cookie-cat input[type="checkbox"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .cat-info span  { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .cat-info small { font-size: 0.7rem; color: var(--muted); }
+
+    /* buttons */
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cookie-btn {
+      flex: 1 1 120px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .cookie-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .cookie-btn:active { transform: translateY(0); }
+
+    .cookie-btn.accept-all {
+      background: var(--gold);
+      color: #0a0a0f;
+    }
+    .cookie-btn.accept-sel {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .cookie-btn.reject-all {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    @media (min-width: 600px) {
+      #cookie-banner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        max-width: 860px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        border-radius: 16px 16px 0 0;
+      }
+      #cookie-banner.hidden {
+        opacity: 0;
+        transform: translateX(-50%) translateY(16px);
+        pointer-events: none;
+      }
+      .cookie-top { flex: 1 1 300px; }
+      .cookie-cats { flex: 1 1 100%; }
+      .cookie-actions { flex-shrink: 0; flex-direction: column; min-width: 160px; }
+      .cookie-btn { flex: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="avatar-ring">
+      <div class="avatar-inner"><img src="https://pbs.twimg.com/profile_images/1898882202219216897/ic7hmOnx_400x400.jpg" alt="YoungKingArtur" /></div>
+    </div>
+
+    <h1 class="name">YoungKingArtur</h1>
+    <p class="handle">@YoungKingArtur</p>
+    <p class="tagline">All Legends Reserved 🦉</p>
+
+    <div class="divider"></div>
+
+    <nav class="links">
+
+      <a class="link-btn youtube" href="https://youtube.com/@YoungKingArtur" target="_blank" rel="noopener">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </span>
+        <span class="btn-text">
+          <span class="btn-label">YouTube</span>
+        </span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="link-btn tiktok" href="https://tiktok.com/@YoungKingArtur" target="_blank" rel="noopener">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#ffffff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+          </svg>
+        </span>
+        <span class="btn-text">
+          <span class="btn-label">TikTok</span>
+        </span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="link-btn spotify" href="https://open.spotify.com/artist/7bUwnz52S6mIKRr7Lb3YL3" target="_blank" rel="noopener">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#1db954" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+          </svg>
+        </span>
+        <span class="btn-text">
+          <span class="btn-label">Spotify</span>
+        </span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="link-btn instagram" href="https://instagram.com/YoungKingArtur" target="_blank" rel="noopener">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffd600"/>
+                <stop offset="50%" stop-color="#e1306c"/>
+                <stop offset="100%" stop-color="#833ab4"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+          </svg>
+        </span>
+        <span class="btn-text">
+          <span class="btn-label">Instagram</span>
+        </span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="link-btn x" href="https://x.com/YoungKingArtur" target="_blank" rel="noopener">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </span>
+        <span class="btn-text">
+          <span class="btn-label">X</span>
+        </span>
+        <span class="arrow">›</span>
+      </a>
+
+    </nav>
+
+    <footer class="footer">
+      <div class="footer-links">
+        <button onclick="openModal('regulamin')">Regulamin</button>
+        <button onclick="openModal('cookies')">Polityka cookies</button>
+      </div>
+      <p class="footer-copy">YoungKingArtur &copy; 2026</p>
+    </footer>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL — REGULAMIN
+  ════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-regulamin" role="dialog" aria-modal="true" aria-label="Regulamin">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Regulamin</h2>
+        <button class="modal-close" onclick="closeModal('regulamin')" aria-label="Zamknij">✕</button>
+      </div>
+      <div class="modal-body" id="regulamin-body">
+        <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.8;">King Artur Venture Sp. z o.o. &bull; ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław<br>NIP: 8971971489 &bull; KRS: 0001238235</p>
+        <h3 style="text-align:center;font-size:1rem;color:var(--text);margin-bottom:4px;">REGULAMIN ŚWIADCZENIA USŁUG DROGĄ ELEKTRONICZNĄ</h3>
+        <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:20px;">dla serwisu youngkingartur.com &bull; Wersja obowiązująca od 21 maja 2026 r.</p>
+
+        <h3>§ 1. Postanowienia ogólne</h3>
+        <p>1. Niniejszy Regulamin (dalej „Regulamin") określa zasady korzystania z serwisu internetowego dostępnego pod adresem youngkingartur.com (dalej „Serwis"), prowadzonego przez King Artur Venture Sp. z o.o. z siedzibą we Wrocławiu (dalej „Usługodawca").</p>
+        <p>2. Serwis ma charakter informacyjno-rozrywkowy i opiniotwórczy. Zawiera analizy geopolityczne, treści true crime, skandale krajowe i międzynarodowe oraz wybrane materiały muzyczne.</p>
+        <p>3. Korzystanie z Serwisu jest dobrowolne i oznacza akceptację niniejszego Regulaminu w całości. Osoby nieakceptujące jego postanowień zobowiązane są do natychmiastowego opuszczenia Serwisu.</p>
+        <p>4. Regulamin jest udostępniany nieodpłatnie pod adresem youngkingartur.com/regulamin w formie umożliwiającej jego pobranie, utrwalenie i wydrukowanie.</p>
+
+        <h3>§ 2. Definicje</h3>
+        <p>Na potrzeby niniejszego Regulaminu przyjmuje się następujące definicje:</p>
+        <ul>
+          <li><strong>„Usługodawca"</strong> – King Artur Venture Sp. z o.o., ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław, NIP: 8971971489, KRS: 0001238235.</li>
+          <li><strong>„Serwis"</strong> – serwis internetowy dostępny pod domeną youngkingartur.com wraz ze wszystkimi podstronami i funkcjonalnościami.</li>
+          <li><strong>„Użytkownik"</strong> – każda osoba fizyczna, prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, która korzysta z Serwisu.</li>
+          <li><strong>„Treści"</strong> – wszelkie materiały audiowizualne, tekstowe, graficzne, thumbnail'e, opisy, analizy, komentarze i inne zasoby opublikowane w Serwisie.</li>
+          <li><strong>„Treści Użytkownika"</strong> – komentarze, opinie i inne materiały dodawane przez Użytkownika za pośrednictwem funkcjonalności Serwisu.</li>
+          <li><strong>„RODO"</strong> – Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z 27 kwietnia 2016 r. o ochronie danych osobowych.</li>
+          <li><strong>„Ustawa o ŚUDE"</strong> – ustawa z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (Dz.U. z 2020 r. poz. 344 z późn. zm.).</li>
+        </ul>
+
+        <h3>§ 3. Prawa autorskie i własność intelektualna</h3>
+        <p>1. Wszystkie Treści zamieszczone w Serwisie stanowią wyłączną własność Usługodawcy lub są przez niego wykorzystywane na podstawie stosownych licencji i podlegają ochronie na mocy ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych oraz przepisów prawa unijnego.</p>
+        <p>2. Bez uprzedniej pisemnej zgody Usługodawcy zabrania się:</p>
+        <ul>
+          <li>kopiowania, powielania, drukowania, publicznego odtwarzania lub udostępniania Treści w całości lub części;</li>
+          <li>modyfikowania, przerabiania, tłumaczenia lub tworzenia dzieł zależnych na podstawie Treści;</li>
+          <li>rozpowszechniania Treści w jakikolwiek sposób, w tym w mediach społecznościowych, bez podania źródła i aktywnego linku;</li>
+          <li>wykorzystywania Treści do trenowania lub fine-tuningu modeli sztucznej inteligencji (AI), systemów machine learning, dużych modeli językowych (LLM) ani żadnych innych systemów generatywnych – zakaz obowiązuje bez względu na cel komercyjny lub niekomercyjny;</li>
+          <li>scrapowania, indeksowania lub automatycznego pobierania danych z Serwisu bez zgody Usługodawcy;</li>
+          <li>usuwania, ukrywania lub modyfikowania oznaczeń praw autorskich i informacji o prawach własności Usługodawcy.</li>
+        </ul>
+        <p>3. Naruszenie postanowień ust. 2 skutkuje odpowiedzialnością cywilną, w tym obowiązkiem zapłaty kary umownej w wysokości 50 000 zł (słownie: pięćdziesiąt tysięcy złotych) za każde stwierdzone naruszenie, niezależnie od prawa dochodzenia odszkodowania uzupełniającego na zasadach ogólnych oraz odpowiedzialności karnej.</p>
+        <p>4. Dozwolone jest cytowanie fragmentów Treści w zakresie przewidzianym przepisami o dozwolonym użytku, pod warunkiem wyraźnego wskazania źródła (youngkingartur.com) i imienia i nazwiska lub pseudonimu autora oraz zamieszczenia aktywnego hiperłącza do oryginalnej publikacji.</p>
+
+        <h3>§ 4. Charakter treści i wyłączenie odpowiedzialności</h3>
+        <p>1. Serwis służy wyłącznie celom informacyjnym, rozrywkowym i opiniotwórczym. Żadna Treść nie stanowi porady prawnej, finansowej, inwestycyjnej, medycznej ani jakiejkolwiek innej porady specjalistycznej.</p>
+        <p>2. Wszelkie analizy, komentarze i oceny – w tym dotyczące konfliktów geopolitycznych, spraw kryminalnych, akt sądowych, postępowań sądowych i administracyjnych, a także sytuacji na rynkach surowców i strategicznych szlaków handlowych – stanowią subiektywne opinie i spekulacje oparte wyłącznie na publicznie dostępnych źródłach medialnych, sądowych i rządowych.</p>
+        <p>3. Usługodawca nie ponosi odpowiedzialności za:</p>
+        <ul>
+          <li>dokładność, kompletność, aktualność ani zgodność z rzeczywistością jakichkolwiek Treści;</li>
+          <li>decyzje podjęte przez Użytkownika lub osoby trzecie na podstawie Treści;</li>
+          <li>szkody bezpośrednie, pośrednie, przypadkowe, szczególne lub wtórne wynikające z korzystania z Serwisu;</li>
+          <li>treści zamieszczone przez Użytkowników (komentarze, opinie), za które odpowiada wyłącznie ich autor;</li>
+          <li>treści dostępne za pośrednictwem linków zewnętrznych;</li>
+          <li>czasowe niedostępności Serwisu spowodowane pracami technicznymi, awarią infrastruktury lub siłą wyższą;</li>
+          <li>szkody wynikające z działania złośliwego oprogramowania, phishingu lub innych ataków skierowanych przeciwko Użytkownikowi.</li>
+        </ul>
+        <p>4. Korzystanie z Serwisu odbywa się wyłącznie na własne ryzyko Użytkownika.</p>
+        <p>5. W maksymalnym zakresie dopuszczalnym przez prawo całkowita odpowiedzialność Usługodawcy wobec Użytkownika ograniczona jest do kwoty 500 zł (słownie: pięćset złotych).</p>
+
+        <h3>§ 5. Zasady korzystania z Serwisu</h3>
+        <p>1. Użytkownik zobowiązuje się korzystać z Serwisu zgodnie z niniejszym Regulaminem, przepisami obowiązującego prawa, zasadami współżycia społecznego oraz dobrymi obyczajami.</p>
+        <p>2. Zabrania się w szczególności:</p>
+        <ul>
+          <li>działań mogących destabilizować działanie Serwisu, w tym ataków DDoS, wstrzykiwania złośliwego kodu lub prób nieautoryzowanego dostępu;</li>
+          <li>automatycznego pobierania danych (scraping, crawling) bez zgody Usługodawcy;</li>
+          <li>korzystania z Serwisu w celach komercyjnych bez uprzedniej pisemnej zgody Usługodawcy;</li>
+          <li>podszywania się pod inne osoby, w tym pracowników Usługodawcy;</li>
+          <li>zamieszczania treści naruszających dobra osobiste lub prawa autorskie osób trzecich;</li>
+          <li>rozsyłania spamu lub niezamówionych komunikatów handlowych za pośrednictwem Serwisu.</li>
+        </ul>
+        <p>3. Usługodawca zastrzega prawo do zablokowania dostępu do Serwisu Użytkownikom naruszającym niniejszy Regulamin bez uprzedniego powiadomienia.</p>
+
+        <h3>§ 6. Komentarze i treści Użytkowników</h3>
+        <p>1. Dodając Treści Użytkownika, Użytkownik oświadcza, że posiada wszelkie prawa do ich publikacji i że ich zamieszczenie nie narusza praw osób trzecich.</p>
+        <p>2. Zamieszczenie Treści Użytkownika jest równoznaczne z udzieleniem Usługodawcy niewyłącznej, nieodpłatnej, nieograniczonej terytorialnie i czasowo licencji na korzystanie z tych Treści.</p>
+        <p>3. Zabrania się zamieszczania Treści Użytkownika:</p>
+        <ul>
+          <li>nawołujących do nienawiści, przemocy lub dyskryminacji;</li>
+          <li>zniesławiających lub naruszających dobra osobiste osób fizycznych lub prawnych;</li>
+          <li>naruszających prawa autorskie lub inne prawa własności intelektualnej;</li>
+          <li>zawierających treści pornograficzne lub o charakterze seksualnym z udziałem osób niepełnoletnich;</li>
+          <li>stanowiących spam, treści reklamowe lub marketingowe bez zgody Usługodawcy;</li>
+          <li>zawierających złośliwe oprogramowanie lub linki do stron szkodliwych.</li>
+        </ul>
+        <p>4. Usługodawca zastrzega prawo do moderowania, edytowania lub usuwania Treści Użytkownika naruszających Regulamin.</p>
+        <p>5. Usługodawca nie jest zobowiązany do przechowywania Treści Użytkownika i może je usunąć w każdym czasie.</p>
+
+        <h3>§ 7. Procedura Notice and Takedown</h3>
+        <p>1. Usługodawca stosuje procedurę notice and takedown zgodnie z art. 14 Ustawy o ŚUDE.</p>
+        <p>2. Zgłoszenia naruszenia praw należy kierować na adres e-mail: prawne@youngkingartur.com lub listownie na adres siedziby Usługodawcy.</p>
+        <p>3. Prawidłowe zgłoszenie powinno zawierać: dane kontaktowe zgłaszającego, opis naruszenia wraz z URL spornej Treści, oświadczenie o posiadaniu praw oraz oświadczenie o prawdziwości informacji pod rygorem odpowiedzialności prawnej.</p>
+        <p>4. Usługodawca zobowiązuje się rozpatrzyć prawidłowe zgłoszenie i – w przypadku stwierdzenia jego zasadności – zablokować lub usunąć sporne Treści w terminie 48 godzin.</p>
+        <p>5. Osoba, która złożyła bezzasadne lub złośliwe zgłoszenie, ponosi odpowiedzialność za szkody wyrządzone Usługodawcy lub autorom Treści.</p>
+
+        <h3>§ 8. Indemnifikacja</h3>
+        <p>1. Użytkownik niebędący konsumentem zobowiązuje się zwolnić Usługodawcę, jego wspólników, pracowników i współpracowników z wszelkiej odpowiedzialności oraz pokryć wszelkie uzasadnione koszty wynikające z roszczeń osób trzecich spowodowanych przez: (a) naruszenie niniejszego Regulaminu, (b) naruszenie przepisów prawa lub praw osób trzecich, lub (c) Treści Użytkownika zamieszczone w Serwisie.</p>
+        <p>2. Postanowień ust. 1 nie stosuje się do Użytkowników będących konsumentami w zakresie, w jakim byłoby to sprzeczne z bezwzględnie obowiązującymi przepisami prawa.</p>
+
+        <h3>§ 9. Procedura reklamacyjna</h3>
+        <p>1. Użytkownik ma prawo złożyć reklamację dotyczącą świadczonych Usług.</p>
+        <p>2. Reklamację należy przesłać na adres e-mail: kontakt@youngkingartur.com lub listownie na adres siedziby Usługodawcy, z dopiskiem „Reklamacja".</p>
+        <p>3. Reklamacja powinna zawierać: imię i nazwisko lub login Użytkownika, opis problemu oraz oczekiwany sposób rozwiązania.</p>
+        <p>4. Usługodawca rozpatrzy reklamację w terminie 14 dni kalendarzowych od jej otrzymania.</p>
+        <p>5. Brak odpowiedzi w terminie 14 dni oznacza uznanie reklamacji za zasadną.</p>
+        <p>6. Użytkownik będący konsumentem ma prawo do skorzystania z pozasądowych sposobów rozpatrywania reklamacji, w szczególności może skorzystać z platformy ODR dostępnej pod adresem https://ec.europa.eu/consumers/odr.</p>
+
+        <h3>§ 10. Ochrona danych osobowych i pliki cookies</h3>
+        <p>1. Administratorem danych osobowych Użytkowników jest King Artur Venture Sp. z o.o. z siedzibą we Wrocławiu.</p>
+        <p>2. Dane osobowe Użytkowników przetwarzane są zgodnie z RODO oraz obowiązującymi przepisami prawa polskiego. Szczegółowe zasady określa Polityka Prywatności dostępna pod adresem youngkingartur.com/polityka-prywatnosci.</p>
+        <p>3. Serwis korzysta z plików cookies. Zasady opisane są w Polityce Prywatności oraz Polityce Cookies dostępnych na stronie Serwisu.</p>
+        <p>4. Usługodawca przetwarza dane eksploatacyjne, o których mowa w art. 18 Ustawy o ŚUDE, w celu prawidłowego funkcjonowania Serwisu.</p>
+
+        <h3>§ 11. Zmiany Regulaminu</h3>
+        <p>1. Usługodawca zastrzega prawo do zmiany niniejszego Regulaminu z ważnych powodów, w szczególności w przypadku zmian przepisów prawa, zmian technologicznych lub zmian w zakresie świadczonych usług.</p>
+        <p>2. O każdej zmianie Regulaminu Usługodawca poinformuje Użytkowników poprzez zamieszczenie stosownego komunikatu na stronie głównej Serwisu z co najmniej 14-dniowym wyprzedzeniem.</p>
+        <p>3. Korzystanie z Serwisu po wejściu w życie zmienionego Regulaminu oznacza jego akceptację.</p>
+
+        <h3>§ 12. Linki zewnętrzne</h3>
+        <p>1. Serwis może zawierać hiperłącza do zewnętrznych stron internetowych. Usługodawca nie ponosi odpowiedzialności za treści, politykę prywatności ani praktyki serwisów osób trzecich.</p>
+        <p>2. Zamieszczenie linku zewnętrznego nie oznacza rekomendacji, endorse'mentu ani afiliacji Usługodawcy z danym serwisem.</p>
+
+        <h3>§ 13. Postanowienia końcowe</h3>
+        <p>1. W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie mają przepisy prawa polskiego, w tym Kodeksu cywilnego, Ustawy o ŚUDE oraz ustawy o prawie autorskim i prawach pokrewnych.</p>
+        <p>2. Prawem właściwym dla wszelkich stosunków prawnych wynikających z niniejszego Regulaminu jest prawo polskie.</p>
+        <p>3. Wszelkie spory wynikające z korzystania z Serwisu będą rozstrzygane przez sąd powszechny właściwy dla siedziby Usługodawcy, z zastrzeżeniem praw konsumentów wynikających z przepisów ogólnych Kodeksu postępowania cywilnego.</p>
+        <p>4. Jeżeli jakiekolwiek postanowienie niniejszego Regulaminu zostanie uznane za nieważne lub bezskuteczne, pozostałe postanowienia pozostają w pełnej mocy (klauzula severability).</p>
+        <p>5. Niniejszy Regulamin stanowi całość porozumienia między Usługodawcą a Użytkownikiem w zakresie korzystania z Serwisu.</p>
+        <p style="margin-top:20px;color:var(--muted);font-size:0.8rem;">Wrocław, 21 maja 2026 r.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL — POLITYKA COOKIES
+  ════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-cookies" role="dialog" aria-modal="true" aria-label="Polityka cookies">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Polityka plików cookies</h2>
+        <button class="modal-close" onclick="closeModal('cookies')" aria-label="Zamknij">✕</button>
+      </div>
+      <div class="modal-body" id="cookies-body">
+        <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.8;">King Artur Venture Sp. z o.o. &bull; ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław<br>NIP: 8971971489 &bull; KRS: 0001238235</p>
+        <h3 style="text-align:center;font-size:1rem;color:var(--text);margin-bottom:4px;">POLITYKA PLIKÓW COOKIES</h3>
+        <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:4px;">serwis youngkingartur.com &bull; Wersja 2.0 — obowiązuje od 21 maja 2026 r.</p>
+        <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-bottom:20px;">Dokument zgodny z RODO, ePrivacy Directive (2002/58/WE) oraz ustawą Prawo telekomunikacyjne</p>
+
+        <h3>§ 1. Czym są pliki cookies?</h3>
+        <p>1. Pliki cookies (inaczej: ciasteczka) to małe pliki tekstowe zapisywane przez przeglądarkę internetową na urządzeniu końcowym Użytkownika podczas odwiedzania stron internetowych.</p>
+        <p>2. Pliki cookies nie zawierają bezpośrednich danych osobowych identyfikujących Użytkownika z imienia i nazwiska, jednak w połączeniu z innymi informacjami mogą stanowić dane osobowe w rozumieniu art. 4 pkt 1 RODO.</p>
+        <p>3. Korzystanie z plików cookies odbywa się zgodnie z: (a) Rozporządzeniem (UE) 2016/679 (RODO), (b) dyrektywą 2002/58/WE o prywatności i łączności elektronicznej (ePrivacy Directive), (c) ustawą z dnia 16 lipca 2004 r. Prawo telekomunikacyjne (art. 173–174), (d) ustawą z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną.</p>
+
+        <h3>§ 2. Administrator i podstawa prawna</h3>
+        <p>1. Administratorem danych przetwarzanych za pośrednictwem plików cookies jest King Artur Venture Sp. z o.o., ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław, NIP: 8971971489.</p>
+        <p>2. Kontakt w sprawach cookies i ochrony danych: kontakt@youngkingartur.com</p>
+        <p>3. Podstawy prawne przetwarzania danych przez cookies:</p>
+        <ul>
+          <li>art. 6 ust. 1 lit. a) RODO – dobrowolna, świadoma i granularna zgoda Użytkownika (dla cookies analitycznych, funkcjonalnych i marketingowych);</li>
+          <li>art. 6 ust. 1 lit. f) RODO – prawnie uzasadniony interes Administratora (dla cookies ściśle niezbędnych);</li>
+          <li>art. 173 ustawy Prawo telekomunikacyjne – obowiązek uzyskania zgody na dostęp do urządzenia końcowego.</li>
+        </ul>
+
+        <h3>§ 3. Rodzaje stosowanych plików cookies</h3>
+        <p>1. Ze względu na czas przechowywania pliki cookies dzielą się na: <strong>sesyjne</strong> (usuwane po zamknięciu przeglądarki) i <strong>stałe</strong> (przechowywane przez określony czas lub do ręcznego usunięcia).</p>
+        <p>2. Ze względu na cel pliki cookies dzielą się na cztery kategorie:</p>
+
+        <p><strong style="color:var(--gold)">Kategoria 1 – Cookies niezbędne (strictly necessary)</strong><br>
+        Podstawa prawna: prawnie uzasadniony interes Administratora (art. 6 ust. 1 lit. f RODO). Zgoda Użytkownika nie jest wymagana.</p>
+        <p>3. Ocena LIA (Legitimate Interest Assessment): Administrator przeprowadził test równoważenia i stwierdził, że interes polegający na zapewnieniu bezpieczeństwa i podstawowej funkcjonalności Serwisu jest uzasadniony, a zakres gromadzonych danych ograniczony do minimum. Dokumentacja LIA dostępna na żądanie pod adresem kontakt@youngkingartur.com.</p>
+        <table>
+          <thead><tr><th>Nazwa cookie</th><th>Dostawca</th><th>Cel</th><th>Typ</th><th>Czas przech.</th></tr></thead>
+          <tbody>
+            <tr><td>cookie_consent</td><td>youngkingartur.com</td><td>Zapamiętuje wybory Użytkownika dotyczące zgody na cookies</td><td>Stały</td><td>12 miesięcy</td></tr>
+            <tr><td>cookie_consent_version</td><td>youngkingartur.com</td><td>Przechowuje wersję polityki cookies, z którą Użytkownik wyraził zgodę</td><td>Stały</td><td>12 miesięcy</td></tr>
+            <tr><td>session_id</td><td>youngkingartur.com</td><td>Identyfikuje sesję Użytkownika i utrzymuje stan nawigacji</td><td>Sesyjny</td><td>Do zamknięcia przeglądarki</td></tr>
+            <tr><td>csrf_token</td><td>youngkingartur.com</td><td>Token zabezpieczający formularze przed atakami CSRF</td><td>Sesyjny</td><td>Do zamknięcia przeglądarki</td></tr>
+            <tr><td>_cf_bm</td><td>Cloudflare, Inc.</td><td>Odróżnia ruch ludzki od botów, ochrona przed atakami DDoS</td><td>Sesyjny</td><td>30 minut</td></tr>
+            <tr><td>__cf_clearance</td><td>Cloudflare, Inc.</td><td>Potwierdzenie przejścia wyzwania bezpieczeństwa Cloudflare</td><td>Stały</td><td>30 min – 24 h</td></tr>
+            <tr><td>cf_ob_info</td><td>Cloudflare, Inc.</td><td>Informacje diagnostyczne o routingu żądania</td><td>Sesyjny</td><td>Do zamknięcia przeglądarki</td></tr>
+            <tr><td>pref_lang</td><td>youngkingartur.com</td><td>Zapamiętuje wybrany język interfejsu</td><td>Stały</td><td>6 miesięcy</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong style="color:var(--gold)">Kategoria 2 – Cookies analityczne / statystyczne</strong><br>
+        Podstawa prawna: zgoda Użytkownika (art. 6 ust. 1 lit. a RODO). Aktywne wyłącznie po udzieleniu zgody.</p>
+        <table>
+          <thead><tr><th>Nazwa cookie</th><th>Dostawca</th><th>Cel</th><th>Typ</th><th>Czas przech.</th></tr></thead>
+          <tbody>
+            <tr><td>_ga</td><td>Google LLC (GA4)</td><td>Główny identyfikator analityczny GA4 – rozróżnia unikalnych użytkowników</td><td>Stały</td><td>14 miesięcy</td></tr>
+            <tr><td>_ga_XXXXXXXXXX</td><td>Google LLC (GA4)</td><td>Przechowuje stan sesji dla konkretnej właściwości GA4</td><td>Stały</td><td>14 miesięcy</td></tr>
+            <tr><td>_gid</td><td>Google LLC (GA4)</td><td>Rozróżnia użytkowników w ciągu 24 godzin</td><td>Stały</td><td>24 godziny</td></tr>
+            <tr><td>_gat</td><td>Google LLC (GA4)</td><td>Ogranicza liczbę żądań do serwerów Google (rate limiting)</td><td>Stały</td><td>1 minuta</td></tr>
+            <tr><td>_gac_*</td><td>Google LLC (GA4)</td><td>Przechowuje informacje o kampaniach Google Ads powiązanych z sesją</td><td>Stały</td><td>90 dni</td></tr>
+            <tr><td>_plausible_*</td><td>Plausible Analytics</td><td>Anonimowa analityka bez plików cookies (fallback)</td><td>Brak</td><td>Brak (sessionStorage)</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong style="color:var(--gold)">Kategoria 3 – Cookies funkcjonalne / preferencyjne</strong><br>
+        Podstawa prawna: zgoda Użytkownika (art. 6 ust. 1 lit. a RODO). Aktywne wyłącznie po udzieleniu zgody.</p>
+        <table>
+          <thead><tr><th>Nazwa cookie</th><th>Dostawca</th><th>Cel</th><th>Typ</th><th>Czas przech.</th></tr></thead>
+          <tbody>
+            <tr><td>pref_theme</td><td>youngkingartur.com</td><td>Zapamiętuje wybrany motyw interfejsu (jasny / ciemny)</td><td>Stały</td><td>12 miesięcy</td></tr>
+            <tr><td>pref_fontsize</td><td>youngkingartur.com</td><td>Zapamiętuje preferowany rozmiar czcionki</td><td>Stały</td><td>12 miesięcy</td></tr>
+            <tr><td>last_visited</td><td>youngkingartur.com</td><td>Zapamiętuje ostatnio odwiedzane kategorie treści</td><td>Stały</td><td>30 dni</td></tr>
+            <tr><td>yt-player-*</td><td>YouTube (Google LLC)</td><td>Preferencje odtwarzacza YouTube wbudowanego w Serwis</td><td>Stały</td><td>12 miesięcy</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong style="color:var(--gold)">Kategoria 4 – Cookies marketingowe / reklamowe</strong><br>
+        Podstawa prawna: zgoda Użytkownika (art. 6 ust. 1 lit. a RODO).</p>
+        <div class="note">Serwis aktualnie nie stosuje cookies marketingowych podmiotów trzecich. W razie ich wprowadzenia Użytkownicy zostaną odrębnie poinformowani, a baner zgody zostanie zaktualizowany przed ich uruchomieniem.</div>
+
+        <h3>§ 4. Dane zbierane za pośrednictwem cookies – szczegółowy zakres</h3>
+        <table>
+          <thead><tr><th>Narzędzie</th><th>Kategoria zbieranych danych</th><th>Dane osobowe?</th><th>Sposób ochrony</th></tr></thead>
+          <tbody>
+            <tr><td>Google Analytics 4</td><td>Zanonimizowany IP, User-Agent, przybliżona lokalizacja, Client ID (pseudonimowy), czas sesji, odwiedzane podstrony, źródło ruchu, zdarzenia interakcji</td><td>Częściowo (pseudonimowe)</td><td>Anonimizacja IP włączona; Consent Mode v2 wdrożony</td></tr>
+            <tr><td>YouTube (embedded)</td><td>Adres IP, User-Agent, identyfikator urządzenia, historia obejrzanych filmów (jeśli zalogowany w Google)</td><td>Tak (jeśli zalogowany)</td><td>Tryb prywatności (youtube-nocookie.com); cookies aktywne tylko po zgodzie</td></tr>
+            <tr><td>Cloudflare</td><td>Adres IP (pełny), User-Agent, sygnatury HTTP, wynik oceny ryzyka bota</td><td>Tak (adres IP)</td><td>DPA z Cloudflare podpisane; dane usuwane po 30 min – 24 h</td></tr>
+            <tr><td>Serwis własny (1st party)</td><td>Identyfikator sesji, preferencje interfejsu, status zgody, wersja polityki cookies</td><td>Nie</td><td>Dane przechowywane wyłącznie na serwerze w UE</td></tr>
+          </tbody>
+        </table>
+        <p>2. Administrator stosuje zasadę minimalizacji danych (art. 5 ust. 1 lit. c RODO) i zbiera wyłącznie dane niezbędne do realizacji określonego celu.</p>
+        <p>3. Administrator wdrożył Google Consent Mode v2, który ogranicza zbieranie danych przez Google do modelowania zagregowanego w przypadku braku zgody Użytkownika.</p>
+
+        <h3>§ 5. Cookies podmiotów trzecich – szczegóły</h3>
+        <table>
+          <thead><tr><th>Dostawca</th><th>Siedziba / transfer</th><th>Zbierane dane</th><th>Podstawa transferu</th><th>Polityka prywatności</th></tr></thead>
+          <tbody>
+            <tr><td>Google LLC (Analytics 4)</td><td>USA</td><td>Zanonimizowany IP, User-Agent, Client ID, zdarzenia analityczne</td><td>SCC wg decyzji KE 2021/914</td><td>policies.google.com/privacy</td></tr>
+            <tr><td>Google LLC (YouTube)</td><td>USA</td><td>IP, User-Agent, ID urządzenia, historia oglądania (jeśli zalogowany)</td><td>SCC; YouTube Terms of Service</td><td>policies.google.com/privacy</td></tr>
+            <tr><td>Cloudflare, Inc.</td><td>USA / serwery w UE (Frankfurt)</td><td>Pełny adres IP, User-Agent, sygnatury HTTP, wynik bot score</td><td>SCC; Cloudflare Data Processing Addendum</td><td>cloudflare.com/privacypolicy/</td></tr>
+          </tbody>
+        </table>
+        <p>2. Użytkownik może skorzystać z dodatkowych narzędzi opt-out:</p>
+        <ul>
+          <li>Google Analytics opt-out: tools.google.com/dlpage/gaoptout</li>
+          <li>Your Online Choices (EDAA): youronlinechoices.com/pl/</li>
+          <li>Network Advertising Initiative: optout.networkadvertising.org/</li>
+        </ul>
+
+        <h3>§ 6. Zgoda, panel zarządzania i narzędzie CMP</h3>
+        <div class="note"><strong>Instrukcja dla administratora:</strong> Przed opublikowaniem dokumentu należy uzupełnić nazwę stosowanego narzędzia CMP w ust. 1. Wybór narzędzia ma znaczenie prawne – audytorzy UODO i CNIL sprawdzają, czy rejestr zgód jest prowadzony prawidłowo.</div>
+        <p>1. Do zarządzania zgodami na pliki cookies Administrator stosuje narzędzie Consent Management Platform (CMP): <strong>własny skrypt</strong>. Narzędzie jest zgodne z wymogami RODO, ePrivacy Directive oraz IAB TCF 2.2.</p>
+        <p>2. Zasady udzielania zgody:</p>
+        <ul>
+          <li><strong>Dobrowolność</strong> – odmowa zgody na cookies nieobowiązkowe nie blokuje dostępu do Serwisu.</li>
+          <li><strong>Granularność</strong> – Użytkownik osobno akceptuje lub odrzuca każdą kategorię.</li>
+          <li><strong>Świadomość</strong> – baner zawiera jasne informacje o celu każdej kategorii przed udzieleniem zgody.</li>
+          <li><strong>Odwoływalność</strong> – zgoda może być cofnięta w każdej chwili w panelu zarządzania cookies w stopce Serwisu.</li>
+          <li><strong>Równa dostępność opcji</strong> – przyciski „Zaakceptuj wszystkie" i „Odrzuć wszystkie" są równoważnie widoczne (wymóg CNIL/UODO 2023+).</li>
+        </ul>
+        <p>3. Każda zgoda jest rejestrowana przez narzędzie CMP z atrybutami: data i godzina udzielenia, wersja polityki cookies, wybrane preferencje kategorii, identyfikator zgody (consent ID) oraz wersja banera. Rejestr zgód stanowi dowód w rozumieniu art. 7 ust. 1 RODO.</p>
+        <p>4. Cookies ściśle niezbędne (Kategoria 1) są aktywne bez zgody Użytkownika – ich stosowanie opiera się na prawnie uzasadnionym interesie (LIA opisane w §3 ust. 3).</p>
+        <p>5. Baner zgody wyświetlany jest ponownie co 12 miesięcy lub każdorazowo po istotnej zmianie niniejszej Polityki Cookies.</p>
+
+        <h3>§ 7. Zarządzanie cookies w przeglądarce</h3>
+        <p>Niezależnie od panelu CMP Użytkownik może zarządzać plikami cookies w ustawieniach przeglądarki:</p>
+        <table>
+          <thead><tr><th>Przeglądarka</th><th>Ścieżka do ustawień cookies</th></tr></thead>
+          <tbody>
+            <tr><td>Google Chrome</td><td>Ustawienia → Prywatność i bezpieczeństwo → Pliki cookie i inne dane witryn</td></tr>
+            <tr><td>Mozilla Firefox</td><td>Opcje → Prywatność i bezpieczeństwo → Ciasteczka i dane witryn</td></tr>
+            <tr><td>Microsoft Edge</td><td>Ustawienia → Pliki cookie i uprawnienia witryn → Zarządzanie plikami cookie</td></tr>
+            <tr><td>Apple Safari (macOS)</td><td>Preferencje → Prywatność → Zarządzaj danymi witryn</td></tr>
+            <tr><td>Safari (iOS/iPadOS)</td><td>Ustawienia → Safari → Blokuj wszystkie pliki cookie</td></tr>
+            <tr><td>Opera</td><td>Ustawienia → Prywatność i bezpieczeństwo → Pliki cookie</td></tr>
+            <tr><td>Samsung Internet</td><td>Ustawienia → Prywatność i bezpieczeństwo → Zarządzaj plikami cookie</td></tr>
+          </tbody>
+        </table>
+        <p>Wyłączenie lub ograniczenie obsługi plików cookies może wpłynąć na funkcjonalność Serwisu.</p>
+
+        <h3>§ 8. Okres przechowywania cookies</h3>
+        <table>
+          <thead><tr><th>Kategoria / Cookie</th><th>Dostawca</th><th>Domyślny okres</th><th>Maks. okres</th><th>Uwagi</th></tr></thead>
+          <tbody>
+            <tr><td>Cookies niezbędne – sesyjne (session_id, csrf_token)</td><td>Serwis własny</td><td>Sesja</td><td>Sesja</td><td>Usuwane automatycznie po zamknięciu przeglądarki</td></tr>
+            <tr><td>Cookies niezbędne – stałe (cookie_consent, pref_lang)</td><td>Serwis własny</td><td>6–12 mies.</td><td>12 mies.</td><td>Po upływie termin zgody jest odnawiana przy kolejnej wizycie</td></tr>
+            <tr><td>_cf_bm, __cf_clearance (Cloudflare)</td><td>Cloudflare</td><td>30 minut</td><td>24 godziny</td><td>Czas wynika z polityki bezpieczeństwa Cloudflare</td></tr>
+            <tr><td>Google Analytics 4 (_ga, _ga_*)</td><td>Google LLC</td><td>14 miesięcy</td><td>26 miesięcy</td><td>Administrator stosuje ustawienie domyślne = 14 mies.</td></tr>
+            <tr><td>_gid (Google Analytics)</td><td>Google LLC</td><td>24 godziny</td><td>24 godziny</td><td>Krótkotrwały identyfikator sesji dziennej</td></tr>
+            <tr><td>_gac_* (Google Ads)</td><td>Google LLC</td><td>90 dni</td><td>90 dni</td><td>Stosowany jeśli połączono GA4 z Google Ads</td></tr>
+            <tr><td>Cookies funkcjonalne (pref_theme, last_visited)</td><td>Serwis własny</td><td>30 dni</td><td>12 miesięcy</td><td>W zależności od rodzaju preferencji</td></tr>
+            <tr><td>YouTube cookies (yt-player-*)</td><td>Google LLC</td><td>12 miesięcy</td><td>12 miesięcy</td><td>Aktywne wyłącznie po zgodzie na kategorię funkcjonalną</td></tr>
+          </tbody>
+        </table>
+        <p>1. Po upływie okresu przechowywania pliki cookies są automatycznie usuwane przez przeglądarkę lub serwer. Administrator weryfikuje okresy przechowywania nie rzadziej niż raz na 12 miesięcy.</p>
+
+        <h3>§ 9. Prawa Użytkownika</h3>
+        <p>W związku z przetwarzaniem danych osobowych za pośrednictwem plików cookies Użytkownikowi przysługują następujące prawa:</p>
+        <ul>
+          <li><strong>Prawo dostępu (art. 15 RODO)</strong> – uzyskanie informacji o przetwarzanych danych i ich kopii.</li>
+          <li><strong>Prawo do sprostowania (art. 16 RODO)</strong> – żądanie poprawienia nieprawidłowych danych.</li>
+          <li><strong>Prawo do usunięcia (art. 17 RODO)</strong> – żądanie usunięcia danych, w szczególności po cofnięciu zgody.</li>
+          <li><strong>Prawo do ograniczenia przetwarzania (art. 18 RODO)</strong> – żądanie zawieszenia przetwarzania swoich danych.</li>
+          <li><strong>Prawo do przenoszenia danych (art. 20 RODO)</strong> – dotyczy danych przetwarzanych na podstawie zgody w sposób zautomatyzowany.</li>
+          <li><strong>Prawo do sprzeciwu (art. 21 RODO)</strong> – wobec przetwarzania opartego na prawnie uzasadnionym interesie.</li>
+          <li><strong>Prawo do cofnięcia zgody (art. 7 ust. 3 RODO)</strong> – w dowolnym momencie przez panel CMP, bez wpływu na wcześniejsze przetwarzanie.</li>
+          <li><strong>Prawo do skargi (art. 77 RODO)</strong> – do Prezesa UODO, ul. Stawki 2, 00-193 Warszawa, kancelaria@uodo.gov.pl.</li>
+        </ul>
+        <p>2. Wnioski dotyczące realizacji praw należy kierować na adres: kontakt@youngkingartur.com. Administrator odpowie w terminie 30 dni (art. 12 ust. 3 RODO).</p>
+
+        <h3>§ 10. Przekazywanie danych poza EOG</h3>
+        <p>1. Dane zbierane przez Google LLC (GA4, YouTube) i Cloudflare, Inc. mogą być przekazywane do Stanów Zjednoczonych.</p>
+        <p>2. Transfer danych do USA odbywa się na podstawie Standardowych klauzul umownych (SCC) zatwierdzonych przez Komisję Europejską decyzją 2021/914 oraz dodatkowych środków technicznych i organizacyjnych wymaganych przez wytyczne EROD.</p>
+        <p>3. Administrator zawarł z Google LLC i Cloudflare Inc. umowy o przetwarzanie danych (DPA), które nakładają na te podmioty obowiązek przestrzegania standardów RODO.</p>
+        <p>4. Kopię stosowanych zabezpieczeń Użytkownik może uzyskać, kontaktując się z Administratorem pod adresem kontakt@youngkingartur.com.</p>
+
+        <h3>§ 11. Zmiany Polityki Cookies</h3>
+        <p>1. Administrator zastrzega prawo do aktualizacji niniejszej Polityki Cookies w przypadku zmian technologicznych, prawnych lub zakresu stosowanych narzędzi.</p>
+        <p>2. O istotnych zmianach Użytkownicy zostaną poinformowani przez: (a) wyświetlenie komunikatu na stronie głównej Serwisu, (b) ponowne wyświetlenie banera zgody CMP z zaznaczeniem zmian.</p>
+        <p>3. Historia zmian Polityki Cookies dostępna jest pod adresem youngkingartur.com/cookies/historia.</p>
+
+        <h3>§ 12. Postanowienia końcowe</h3>
+        <p>1. W sprawach nieuregulowanych niniejszą Polityką Cookies zastosowanie mają przepisy prawa polskiego, RODO oraz Regulamin Serwisu.</p>
+        <p>2. Niniejsza Polityka Cookies stanowi integralną część Polityki Prywatności Serwisu dostępnej pod adresem youngkingartur.com/polityka-prywatnosci.</p>
+        <p>3. Jeśli którekolwiek postanowienie niniejszej Polityki Cookies zostanie uznane za nieważne lub bezskuteczne, pozostałe postanowienia pozostają w mocy (klauzula rozdzielności).</p>
+        <p>4. W razie pytań lub wątpliwości: kontakt@youngkingartur.com</p>
+        <p style="margin-top:20px;color:var(--muted);font-size:0.8rem;">Wrocław, 21 maja 2026 r. &bull; King Artur Venture Sp. z o.o.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       COOKIE CONSENT BANNER
+  ════════════════════════════════════════ -->
+  <div id="cookie-banner" role="dialog" aria-modal="true" aria-label="Zgoda na pliki cookies">
+    <div class="cookie-top">
+      <strong>Szanujemy Twoją prywatność</strong>
+      <p>
+        Używamy plików cookies, aby strona działała poprawnie i abyśmy mogli analizować ruch.
+        Możesz zaakceptować wszystkie, wybrać kategorie lub odrzucić niewymagane.
+        Więcej w <a href="polityka-cookies.html">Polityce cookies</a>.
+      </p>
+    </div>
+
+    <div class="cookie-cats">
+      <label class="cookie-cat">
+        <input type="checkbox" checked disabled id="cat-necessary" />
+        <span class="cat-info">
+          <span>Niezbędne</span>
+          <small>Zawsze aktywne — wymagane do działania strony</small>
+        </span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cat-analytics" />
+        <span class="cat-info">
+          <span>Analityczne</span>
+          <small>Pomaga nam rozumieć, skąd przychodzisz</small>
+        </span>
+      </label>
+      <label class="cookie-cat">
+        <input type="checkbox" id="cat-marketing" />
+        <span class="cat-info">
+          <span>Marketingowe</span>
+          <small>Personalizacja treści i reklam</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="cookie-actions">
+      <button class="cookie-btn accept-all"  id="btn-accept-all">Akceptuj wszystkie</button>
+      <button class="cookie-btn accept-sel"  id="btn-accept-sel">Zapisz wybór</button>
+      <button class="cookie-btn reject-all"  id="btn-reject-all">Odrzuć niewymagane</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      var el = document.getElementById('modal-' + id);
+      el.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById('modal-' + id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+      backdrop.addEventListener('click', function(e) {
+        if (e.target === backdrop) closeModal(backdrop.id.replace('modal-', ''));
+      });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-backdrop.open').forEach(function(m) {
+          closeModal(m.id.replace('modal-', ''));
+        });
+      }
+    });
+
+    var COOKIE_KEY = 'yka_cookie_consent_v1';
+    var banner = document.getElementById('cookie-banner');
+
+    function hideBanner() {
+      banner.style.opacity = '0';
+      banner.style.transform = banner.style.transform
+        ? banner.style.transform.replace('translateY(0px)', '') + ' translateY(12px)'
+        : 'translateY(12px)';
+      setTimeout(function () { banner.style.display = 'none'; }, 280);
+    }
+
+    function saveConsent(mode) {
+      var analytics = document.getElementById('cat-analytics').checked;
+      var marketing = document.getElementById('cat-marketing').checked;
+      var prefs = {
+        necessary: true,
+        analytics: mode === 'all' ? true  : mode === 'none' ? false : analytics,
+        marketing: mode === 'all' ? true  : mode === 'none' ? false : marketing,
+        ts: Date.now()
+      };
+      try { localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs)); } catch (e) {}
+      hideBanner();
+    }
+
+    document.getElementById('btn-accept-all').addEventListener('click', function () { saveConsent('all'); });
+    document.getElementById('btn-accept-sel').addEventListener('click', function () { saveConsent('selected'); });
+    document.getElementById('btn-reject-all').addEventListener('click', function () { saveConsent('none'); });
+
+    try {
+      var saved = JSON.parse(localStorage.getItem(COOKIE_KEY));
+      if (saved && saved.ts && (Date.now() - saved.ts) < 365 * 24 * 3600 * 1000) {
+        banner.style.display = 'none';
+      }
+    } catch (e) {}
+  </script>
+</body>
+</html>
