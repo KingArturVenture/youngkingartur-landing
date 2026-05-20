@@ -577,6 +577,7 @@
     <footer class="footer">
       <div class="footer-links">
         <button onclick="openModal('regulamin')">Regulamin</button>
+        <button onclick="openModal('privacy')">Polityka prywatności</button>
         <button onclick="openModal('cookies')">Polityka cookies</button>
       </div>
       <p class="footer-copy">YoungKingArtur &copy; 2026</p>
@@ -719,6 +720,93 @@
   </div>
 
   <!-- ═══════════════════════════════════════
+       MODAL — POLITYKA PRYWATNOŚCI
+  ════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-privacy" role="dialog" aria-modal="true" aria-label="Polityka prywatności">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Polityka prywatności</h2>
+        <button class="modal-close" onclick="closeModal('privacy')" aria-label="Zamknij">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;line-height:1.8;">King Artur Venture Sp. z o.o. &bull; ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław<br>NIP: 8971971489 &bull; KRS: 0001238235</p>
+        <h3 style="text-align:center;font-size:1rem;color:var(--text);margin-bottom:4px;">POLITYKA PRYWATNOŚCI</h3>
+        <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:20px;">serwis youngkingartur.com &bull; obowiązuje od 21 maja 2026 r. &bull; zgodna z RODO (art. 13)</p>
+
+        <h3>§ 1. Administrator danych osobowych</h3>
+        <p>1. Administratorem Twoich danych osobowych jest <strong>King Artur Venture Sp. z o.o.</strong> z siedzibą przy ul. św. Mikołaja 8/11 lok. 208, 50-125 Wrocław, NIP: 8971971489, KRS: 0001238235 (dalej „Administrator").</p>
+        <p>2. Kontakt w sprawach ochrony danych osobowych: <strong>kontakt@youngkingartur.com</strong></p>
+        <p>3. Administrator nie wyznaczył Inspektora Ochrony Danych (IOD), ponieważ nie jest do tego zobowiązany na mocy art. 37 RODO. W sprawach dotyczących danych osobowych kontaktuj się bezpośrednio z Administratorem.</p>
+
+        <h3>§ 2. Jakie dane zbieramy i w jakim celu</h3>
+        <p>Administrator przetwarza dane osobowe wyłącznie w zakresie niezbędnym do realizacji poniższych celów:</p>
+
+        <p><strong style="color:var(--gold)">a) Logi serwera i bezpieczeństwo</strong></p>
+        <ul>
+          <li><strong>Dane:</strong> adres IP, User-Agent przeglądarki, data i godzina żądania, odwiedzana strona, kod odpowiedzi HTTP.</li>
+          <li><strong>Cel:</strong> zapewnienie bezpieczeństwa i stabilności działania Serwisu, wykrywanie ataków i nadużyć.</li>
+          <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes Administratora.</li>
+          <li><strong>Okres przechowywania:</strong> do 30 dni, następnie automatyczne usunięcie.</li>
+        </ul>
+
+        <p><strong style="color:var(--gold)">b) Pliki cookies i analityka</strong></p>
+        <ul>
+          <li><strong>Dane:</strong> identyfikatory sesji, preferencje interfejsu, zanonimizowane dane analityczne (Google Analytics 4 – szczegóły w Polityce Cookies).</li>
+          <li><strong>Cel:</strong> prawidłowe działanie Serwisu (cookies niezbędne) oraz analiza ruchu w celu ulepszania Serwisu (cookies analityczne).</li>
+          <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. f RODO (cookies niezbędne) / art. 6 ust. 1 lit. a RODO – zgoda (cookies analityczne i funkcjonalne).</li>
+          <li><strong>Okres przechowywania:</strong> zgodnie z Polityką Cookies dostępną w stopce Serwisu.</li>
+        </ul>
+
+        <p><strong style="color:var(--gold)">c) Kontakt e-mail</strong></p>
+        <ul>
+          <li><strong>Dane:</strong> adres e-mail, imię i nazwisko (jeśli podane), treść wiadomości.</li>
+          <li><strong>Cel:</strong> odpowiedź na przesłane zapytanie, obsługa reklamacji, realizacja procedury notice and takedown.</li>
+          <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. b RODO (realizacja umowy / działania przed zawarciem umowy) lub art. 6 ust. 1 lit. f RODO (uzasadniony interes – odpowiedź na wiadomość).</li>
+          <li><strong>Okres przechowywania:</strong> przez czas niezbędny do obsługi sprawy, nie dłużej niż 3 lata od ostatniego kontaktu (przedawnienie roszczeń).</li>
+        </ul>
+
+        <h3>§ 3. Odbiorcy danych</h3>
+        <p>Twoje dane mogą być przekazywane następującym kategoriom odbiorców:</p>
+        <ul>
+          <li><strong>Cloudflare, Inc.</strong> – dostawca infrastruktury sieciowej i ochrony przed atakami DDoS (dane bezpieczeństwa, adresy IP).</li>
+          <li><strong>Google LLC</strong> – dostawca usług analitycznych (Google Analytics 4) oraz infrastruktury wideo (YouTube), wyłącznie po udzieleniu zgody na cookies analityczne / funkcjonalne.</li>
+          <li><strong>Dostawcy usług prawnych i księgowych</strong> – w zakresie wymaganym przepisami prawa.</li>
+          <li><strong>Organy publiczne</strong> – wyłącznie gdy Administrator jest do tego zobowiązany przepisami prawa (np. na żądanie sądu, prokuratury, UODO).</li>
+        </ul>
+        <p>Administrator nie sprzedaje danych osobowych Użytkowników podmiotom trzecim.</p>
+
+        <h3>§ 4. Przekazywanie danych poza EOG</h3>
+        <p>Dane mogą być przekazywane do Stanów Zjednoczonych w związku z korzystaniem z usług Google LLC i Cloudflare, Inc. Transfer odbywa się na podstawie <strong>Standardowych klauzul umownych (SCC)</strong> zatwierdzonych przez Komisję Europejską decyzją 2021/914, z zastosowaniem dodatkowych środków technicznych (szyfrowanie, pseudonimizacja). Szczegóły w Polityce Cookies.</p>
+
+        <h3>§ 5. Twoje prawa</h3>
+        <p>Na podstawie RODO przysługują Ci następujące prawa:</p>
+        <ul>
+          <li><strong>Prawo dostępu (art. 15)</strong> – możesz uzyskać informację o przetwarzanych danych i ich kopię.</li>
+          <li><strong>Prawo do sprostowania (art. 16)</strong> – możesz żądać poprawienia nieprawidłowych lub uzupełnienia niekompletnych danych.</li>
+          <li><strong>Prawo do usunięcia (art. 17)</strong> – możesz żądać usunięcia danych w przypadkach określonych w RODO.</li>
+          <li><strong>Prawo do ograniczenia przetwarzania (art. 18)</strong> – możesz żądać zawieszenia przetwarzania w określonych sytuacjach.</li>
+          <li><strong>Prawo do przenoszenia danych (art. 20)</strong> – dotyczy danych przetwarzanych automatycznie na podstawie zgody lub umowy.</li>
+          <li><strong>Prawo do sprzeciwu (art. 21)</strong> – możesz sprzeciwić się przetwarzaniu opartemu na prawnie uzasadnionym interesie.</li>
+          <li><strong>Prawo do cofnięcia zgody (art. 7 ust. 3)</strong> – możesz cofnąć zgodę na cookies w panelu zarządzania w stopce Serwisu; cofnięcie zgody nie wpływa na zgodność przetwarzania sprzed cofnięcia.</li>
+          <li><strong>Prawo do skargi (art. 77)</strong> – możesz wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa, kancelaria@uodo.gov.pl, uodo.gov.pl.</li>
+        </ul>
+        <p>Wnioski kieruj na adres: <strong>kontakt@youngkingartur.com</strong>. Administrator odpowie w terminie 30 dni; w uzasadnionych przypadkach termin może zostać przedłużony o 60 dni, o czym zostaniesz poinformowany.</p>
+
+        <h3>§ 6. Dobrowolność podania danych</h3>
+        <p>Podanie danych osobowych jest dobrowolne. Niepodanie danych kontaktowych uniemożliwia jednak odpowiedź na zapytanie. Korzystanie z Serwisu nie wymaga podawania żadnych danych osobowych — logi serwera są zbierane automatycznie jako element infrastruktury technicznej.</p>
+
+        <h3>§ 7. Automatyczne podejmowanie decyzji i profilowanie</h3>
+        <p>Administrator nie stosuje automatycznego podejmowania decyzji ani profilowania w rozumieniu art. 22 RODO. Google Analytics 4 generuje zagregowane raporty statystyczne, które nie wywołują skutków prawnych ani podobnych istotnych skutków dla poszczególnych Użytkowników.</p>
+
+        <h3>§ 8. Zmiany Polityki prywatności</h3>
+        <p>Administrator zastrzega prawo do aktualizacji niniejszej Polityki prywatności. O istotnych zmianach Użytkownicy zostaną poinformowani przez komunikat na stronie głównej Serwisu. Data ostatniej aktualizacji wskazana jest w nagłówku dokumentu.</p>
+
+        <p style="margin-top:20px;color:var(--muted);font-size:0.8rem;">Wrocław, 21 maja 2026 r. &bull; King Artur Venture Sp. z o.o.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
        MODAL — POLITYKA COOKIES
   ════════════════════════════════════════ -->
   <div class="modal-backdrop" id="modal-cookies" role="dialog" aria-modal="true" aria-label="Polityka cookies">
@@ -830,7 +918,7 @@
 
         <h3>§ 6. Zgoda, panel zarządzania i narzędzie CMP</h3>
         <div class="note"><strong>Instrukcja dla administratora:</strong> Przed opublikowaniem dokumentu należy uzupełnić nazwę stosowanego narzędzia CMP w ust. 1. Wybór narzędzia ma znaczenie prawne – audytorzy UODO i CNIL sprawdzają, czy rejestr zgód jest prowadzony prawidłowo.</div>
-        <p>1. Do zarządzania zgodami na pliki cookies Administrator stosuje narzędzie Consent Management Platform (CMP): <strong>własny skrypt</strong>. Narzędzie jest zgodne z wymogami RODO, ePrivacy Directive oraz IAB TCF 2.2.</p>
+        <p>1. Do zarządzania zgodami na pliki cookies Administrator stosuje narzędzie Consent Management Platform (CMP): <strong>własny skrypt</strong>. Narzędzie jest zgodne z wymogami RODO oraz ePrivacy Directive.</p>
         <p>2. Zasady udzielania zgody:</p>
         <ul>
           <li><strong>Dobrowolność</strong> – odmowa zgody na cookies nieobowiązkowe nie blokuje dostępu do Serwisu.</li>
