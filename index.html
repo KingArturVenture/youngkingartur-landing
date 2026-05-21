@@ -471,24 +471,24 @@
 
     @media (min-width: 600px) {
       #cookie-banner {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        max-width: 860px;
+        flex-direction: column;
+        align-items: center;
+        max-width: 660px;
         left: 50%;
         right: auto;
         transform: translateX(-50%);
         border-radius: 16px 16px 0 0;
+        text-align: center;
       }
       #cookie-banner.hidden {
         opacity: 0;
         transform: translateX(-50%) translateY(16px);
         pointer-events: none;
       }
-      .cookie-top { flex: 1 1 300px; }
-      .cookie-cats { flex: 1 1 100%; }
-      .cookie-actions { flex-shrink: 0; flex-direction: row; }
-      .cookie-btn { flex: 1 1 0; }
+      .cookie-top { width: 100%; text-align: left; }
+      .cookie-cats { width: 100%; justify-content: center; }
+      .cookie-actions { width: 100%; flex-direction: row; justify-content: center; }
+      .cookie-btn { flex: 1 1 0; max-width: 200px; }
     }
   </style>
 </head>
