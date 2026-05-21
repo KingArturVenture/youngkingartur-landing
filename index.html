@@ -386,8 +386,8 @@
     /* toggles */
     .cookie-cats {
       display: flex;
-      flex-wrap: nowrap;
-      gap: 8px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .cookie-cat {
@@ -397,12 +397,11 @@
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 8px 12px;
       cursor: pointer;
       user-select: none;
       transition: border-color 0.15s;
-      flex: 1 1 0;
-      min-width: 0;
+      flex: 1 1 140px;
     }
     .cookie-cat:hover { border-color: rgba(201,168,76,0.4); }
 
@@ -437,12 +436,12 @@
     /* buttons */
     .cookie-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-wrap: nowrap;
+      gap: 8px;
     }
 
     .cookie-btn {
-      flex: 1 1 120px;
+      flex: 1 1 0;
       padding: 10px 16px;
       border-radius: 10px;
       font-size: 0.82rem;
@@ -488,8 +487,8 @@
       }
       .cookie-top { flex: 1 1 300px; }
       .cookie-cats { flex: 1 1 100%; }
-      .cookie-actions { flex-shrink: 0; flex-direction: column; min-width: 160px; }
-      .cookie-btn { flex: none; }
+      .cookie-actions { flex-shrink: 0; flex-direction: row; }
+      .cookie-btn { flex: 1 1 0; }
     }
   </style>
 </head>
