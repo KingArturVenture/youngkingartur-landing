@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YoungKingArtur</title>
   <meta name="description" content="Oficjalny link-in-bio @YoungKingArtur — YouTube, TikTok, Spotify, Instagram, X" />
+
+  <!-- Google Consent Mode v2 — defaults denied before user choice -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage:    'denied',
+      ad_storage:           'denied',
+      ad_user_data:         'denied',
+      ad_personalization:   'denied',
+      functionality_storage:'denied',
+      wait_for_update:      500
+    });
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JP2WDMZDBR"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-JP2WDMZDBR', { anonymize_ip: true });
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1088,6 +1109,17 @@
       setTimeout(function () { banner.style.display = 'none'; }, 280);
     }
 
+    function applyGtagConsent(prefs) {
+      if (typeof gtag !== 'function') return;
+      gtag('consent', 'update', {
+        analytics_storage:     prefs.analytics ? 'granted' : 'denied',
+        functionality_storage: prefs.analytics ? 'granted' : 'denied',
+        ad_storage:            prefs.marketing ? 'granted' : 'denied',
+        ad_user_data:          prefs.marketing ? 'granted' : 'denied',
+        ad_personalization:    prefs.marketing ? 'granted' : 'denied'
+      });
+    }
+
     function saveConsent(mode) {
       var analytics = document.getElementById('cat-analytics').checked;
       var marketing = document.getElementById('cat-marketing').checked;
@@ -1098,6 +1130,7 @@
         ts: Date.now()
       };
       try { localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs)); } catch (e) {}
+      applyGtagConsent(prefs);
       hideBanner();
     }
 
@@ -1109,6 +1142,7 @@
       var saved = JSON.parse(localStorage.getItem(COOKIE_KEY));
       if (saved && saved.ts && (Date.now() - saved.ts) < 365 * 24 * 3600 * 1000) {
         banner.style.display = 'none';
+        applyGtagConsent(saved);
       }
     } catch (e) {}
   </script>
